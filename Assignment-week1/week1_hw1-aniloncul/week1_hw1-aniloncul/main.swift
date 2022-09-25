@@ -55,7 +55,7 @@ func registeration() {
 }
 
 func homepage() {
-    var filteredArray = movieArray.filter {
+    let filteredArray = movieArray.filter {
         $0.ratedOver < user.age
         }
     print(filteredArray)
