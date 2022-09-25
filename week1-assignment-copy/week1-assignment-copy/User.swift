@@ -14,5 +14,6 @@ struct User {
     var age: Int
     var occupation: String
     var moneyAmount: Int
+    var wants: Bool
 
     }

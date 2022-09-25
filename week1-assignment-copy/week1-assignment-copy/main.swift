@@ -7,7 +7,7 @@
 
 import Foundation
 
-var user = User(username: "", gender: "", age: 0, occupation: "", moneyAmount: .zero)
+var user = User(username: "", gender: "", age: 0, occupation: "", moneyAmount: .zero, wants: true)
 var movieArray = [Product]()
 movieArray += [recepIvedik,aykutEniste,babamVeOglum,askiMemnu,avrupayakasi,cennetmahallesi,
                otuzikincigun,planetEarth,insider,cedric,garfield,pokemon]
@@ -24,6 +24,7 @@ func registeration() {
         user.username = inputName
         print("Please enter your age.")
     }
+    
     
     if let inputAge = readLine()
     {
@@ -56,13 +57,13 @@ func registeration() {
 
 
 func homepage() {
-    print("Lets filter some adult contents for children.")
+    print("Lets filter movies constrainted by you age. These are the movies suitable for youç")
     
     var filteredArray = movieArray.filter {
         $0.ratedOver <= user.age }
     
     for movie in filteredArray {
-        print(movie.title, movie.ratedOver, movie.price)
+        print(movie.title)
     }
     
     print("Choose a category: 'Horror', 'Drama', 'Cringe', 'Comedy', 'History', 'Nature', 'Action' ")
@@ -106,12 +107,37 @@ func homepage() {
         case Action = "Action"
     }
     print("Hello \(user.username) these are the movies are good for you criteria:")
+    
+    var sum = 0
     for movie in shoppingCard {
-       
+        print(" Movie name: \(movie.title). This movie is for age over: \(movie.ratedOver). Movies' category is: \(movie.category). IMDB Point:\( movie.imdbPoints). Price: \(movie.price)₺")
+        print("These movies cost total of \(sum)₺. You have \(user.moneyAmount)₺. If you want this movie type 'true' else 'false' ")
         
-        print(" Movie name: \(movie.title). This movie is for age over: \(movie.ratedOver). Movies' category is: \(movie.category). IMDB Point:\( movie.imdbPoints). Price: \(movie.price) ₺")
+        for movie in shoppingCard {
+            if let inputWants = readLine() {
+                if let yesOrNo = Bool(inputWants) {
+                    user.wants = yesOrNo
+                }
+            }
+            if user.wants {
+                movie.addToList()
+            } else {
+            movie.deleteFromList()
+        }
+        sum = sum + movie.price
+        
     }
-
+    
+    
+    if user.moneyAmount >= sum {
+        let netBalance = user.moneyAmount - sum
+        print("You have \(netBalance)₺ left.")
+    } else {
+        print("You don't have enough money. :(")
+    }
+    
+    
+}
 }
 
 

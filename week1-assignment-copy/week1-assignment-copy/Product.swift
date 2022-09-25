@@ -11,7 +11,7 @@ import Foundation
 protocol First {
     func addToList()
     func deleteFromList()
-    //var ratedOver: Int
+    
 }
 
 class Product:First {
@@ -21,6 +21,7 @@ class Product:First {
     var category: String = ""
     var ratedOver: Int = .zero
     var imdbPoints: Float = .zero
+    
     
     init(title: String, price: Int, category: String,ratedOver: Int, imdbPoints: Float) {
         self.title = title
@@ -32,12 +33,12 @@ class Product:First {
     
     
     func addToList() {
-        
+       
         
     }
     
     func deleteFromList() {
-        
+       
     }
     
 }
